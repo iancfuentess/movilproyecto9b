@@ -1,0 +1,455 @@
+.gestionar-content {
+  min-height: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%);
+  font-family: "Gudea", sans-serif;
+  box-sizing: border-box;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.encabezado {
+  max-width: 900px;
+  margin: 0 auto 20px auto;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.subtitulo {
+  margin: 0 0 6px 0;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+
+  color: #ffffff;
+}
+
+h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.descripcion {
+  margin: 8px 0 0 0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+}
+
+/* =========================
+   BOTONES GENERALES
+========================= */
+
+.btn-volver,
+.btn-regresar,
+.btn-actualizar,
+.btn-eliminar,
+.btn-agregar {
+  border: none;
+  border-radius: 6px;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.btn-volver:hover,
+.btn-regresar:hover,
+.btn-actualizar:hover,
+.btn-eliminar:hover,
+.btn-agregar:hover {
+  transform: translateY(-2px);
+  opacity: 0.9;
+}
+
+/* =========================
+   BOTÓN VER USUARIOS
+========================= */
+
+.btn-volver {
+  padding: 10px 18px;
+
+  background: #35394a;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 13px;
+}
+
+/* =========================
+   MENSAJE
+========================= */
+
+.mensaje {
+  max-width: 900px;
+
+  margin: 0 auto 20px auto;
+  padding: 14px 18px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-radius: 8px;
+
+  color: #35394a;
+
+  font-weight: 700;
+}
+
+/* =========================
+   PANELES
+========================= */
+
+.panel {
+  max-width: 900px;
+
+  margin: 0 auto 20px auto;
+
+  padding: 22px;
+
+  background: #2f3140;
+
+  border-radius: 10px;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+  box-sizing: border-box;
+}
+
+.panel h2 {
+  margin: 0 0 20px 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.campo label {
+  color: #ffffff;
+
+  font-size: 12px;
+
+  font-weight: 700;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.campo input {
+  width: 100%;
+
+  padding: 13px 14px;
+
+  box-sizing: border-box;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: #ffffff;
+
+  /* TEXTO QUE ESCRIBE EL USUARIO */
+  color: #000000;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  outline: none;
+
+  transition: box-shadow 0.2s ease;
+}
+
+/* PLACEHOLDER */
+.campo input::placeholder {
+  color: #777777;
+
+  opacity: 1;
+}
+
+/* CUANDO EL USUARIO ESTÁ ESCRIBIENDO */
+.campo input:focus {
+  color: #000000;
+
+  box-shadow: 0 0 0 3px rgba(187, 109, 236, 0.35);
+}
+
+/* =========================
+   BOTÓN AGREGAR
+========================= */
+
+.btn-agregar {
+  width: 100%;
+
+  margin-top: 8px;
+
+  padding: 13px;
+
+  background: linear-gradient(90deg, #ea5c54, #bb6dec);
+
+  color: #ffffff;
+
+  font-family: inherit;
+
+  font-weight: 700;
+
+  font-size: 14px;
+}
+
+.btn-agregar:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.6;
+
+  transform: none;
+}
+
+/* =========================
+   ENCABEZADO USUARIOS
+========================= */
+
+.usuarios-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+.usuarios-header h2 {
+  margin: 0;
+}
+
+/* =========================
+   BOTÓN ACTUALIZAR
+========================= */
+
+.btn-actualizar {
+  padding: 10px 16px;
+
+  background: #454a5d;
+
+  color: #ffffff;
+
+  font-size: 13px;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.estado {
+  margin: 0;
+
+  padding: 18px;
+
+  color: #ffffff;
+
+  text-align: center;
+}
+
+/* =========================
+   TARJETAS DE USUARIOS
+========================= */
+
+.usuario-card {
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  margin-bottom: 12px;
+
+  padding: 18px;
+
+  background: #414657;
+
+  border-radius: 8px;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.usuario-card:hover {
+  transform: translateY(-2px);
+
+  background: #484e61;
+}
+
+.usuario-card:last-child {
+  margin-bottom: 0;
+}
+
+.usuario-info {
+  min-width: 0;
+}
+
+.usuario-info h3 {
+  margin: 0 0 8px 0;
+
+  color: #ffffff;
+
+  font-size: 18px;
+}
+
+.username {
+  margin: 0 0 8px 0;
+
+  color: #d58cf5;
+
+  font-weight: 700;
+}
+
+.email {
+  margin: 0 0 12px 0;
+
+  color: #ffffff;
+
+  font-size: 14px;
+
+  word-break: break-word;
+}
+
+.id {
+  color: #bfc3cf;
+
+  font-size: 11px;
+}
+
+/* =========================
+   BOTÓN ELIMINAR
+========================= */
+
+.btn-eliminar {
+  flex-shrink: 0;
+
+  padding: 10px 18px;
+
+  background: #ea5c54;
+
+  color: #ffffff;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+/* =========================
+   BOTÓN REGRESAR
+========================= */
+
+.regresar {
+  max-width: 900px;
+
+  margin: 25px auto 0 auto;
+
+  display: flex;
+
+  justify-content: center;
+}
+
+.btn-regresar {
+  padding: 12px 22px;
+
+  background: #35394a;
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 13px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+  .gestionar-content {
+    padding: 15px;
+  }
+
+  .encabezado {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  h1 {
+    font-size: 27px;
+  }
+
+  .btn-volver {
+    width: 100%;
+
+    text-align: center;
+
+    box-sizing: border-box;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .usuario-card {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .btn-eliminar {
+    width: 100%;
+  }
+
+  .usuarios-header {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .btn-actualizar {
+    width: 100%;
+  }
+}

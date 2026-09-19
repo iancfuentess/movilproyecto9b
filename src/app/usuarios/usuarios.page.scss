@@ -1,0 +1,534 @@
+@import url("https://fonts.googleapis.com/css?family=Gudea:400,700");
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+
+:host {
+  display: block;
+
+  width: 100%;
+
+  min-height: 100%;
+}
+
+.usuarios-content {
+  width: 100%;
+
+  min-height: 100vh;
+
+  box-sizing: border-box;
+
+  padding: 45px 20px 80px;
+
+  background: linear-gradient(135deg, #ea5c54 0%, #bb6dec 100%);
+
+  font-family: "Gudea", sans-serif;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+.header {
+  max-width: 900px;
+
+  margin: 0 auto 35px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 25px;
+
+  color: white;
+}
+
+.header-info {
+  flex: 1;
+}
+
+.subtitle {
+  margin: 0 0 8px;
+
+  font-size: 12px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 2px;
+
+  opacity: 0.8;
+}
+
+.header h1 {
+  margin: 0;
+
+  font-size: 32px;
+
+  font-weight: 700;
+
+  color: white;
+}
+
+.description {
+  margin: 12px 0 0;
+
+  font-size: 14px;
+
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* =========================
+   ACCIONES DEL ENCABEZADO
+========================= */
+
+.header-actions {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+}
+
+/* =========================
+   BOTÓN GESTIONAR
+========================= */
+
+.btn-gestionar {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 12px 18px;
+
+  background: linear-gradient(135deg, #35394a, #1f222e);
+
+  color: #ffffff;
+
+  text-decoration: none;
+
+  border-top: 2px solid #d8312a;
+
+  font-family: "Gudea", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-gestionar:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   CONTADOR
+========================= */
+
+.contador {
+  min-width: 105px;
+
+  padding: 18px;
+
+  text-align: center;
+
+  background: rgba(31, 34, 46, 0.9);
+
+  border-top: 2px solid #d8312a;
+
+  box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.25);
+}
+
+.contador span {
+  display: block;
+
+  font-size: 10px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 1px;
+
+  color: #afb1be;
+}
+
+.contador strong {
+  display: block;
+
+  margin-top: 8px;
+
+  font-size: 30px;
+
+  color: #dc6180;
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.mensaje {
+  max-width: 900px;
+
+  margin: 0 auto 20px;
+
+  padding: 15px 18px;
+
+  background: rgba(31, 34, 46, 0.85);
+
+  color: white;
+
+  border-left: 4px solid #dc6180;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mensaje.error {
+  border-left-color: #ff4d4d;
+
+  color: #ffd6d6;
+}
+
+/* =========================
+   LISTA DE USUARIOS
+========================= */
+
+.usuarios-lista {
+  max-width: 900px;
+
+  margin: 0 auto;
+}
+
+.usuario-card {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+
+  padding: 22px;
+
+  background: linear-gradient(
+    45deg,
+    rgba(53, 57, 74, 0.98) 0%,
+    rgba(31, 34, 46, 0.98) 100%
+  );
+
+  border-top: 2px solid #d8312a;
+
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.usuario-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+  width: 65px;
+
+  height: 65px;
+
+  min-width: 65px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: rgba(220, 97, 128, 0.15);
+
+  border: 2px solid #dc6180;
+
+  color: #dc6180;
+
+  font-size: 26px;
+
+  font-weight: bold;
+}
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.usuario-info {
+  flex: 1;
+
+  min-width: 0;
+}
+
+.usuario-info h2 {
+  margin: 0 0 7px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+
+  font-weight: 700;
+}
+
+.usuario-info p {
+  margin: 5px 0;
+}
+
+.username {
+  color: #dc6180;
+
+  font-size: 14px;
+}
+
+.email {
+  color: #afb1be;
+
+  font-size: 14px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* =========================
+   ID
+========================= */
+
+.usuario-id {
+  position: absolute;
+
+  top: 15px;
+
+  right: 18px;
+
+  color: #5b5e6f;
+
+  font-size: 11px;
+
+  letter-spacing: 1px;
+}
+
+/* =========================
+   BOTONES FINALES
+========================= */
+
+.botones-finales {
+  max-width: 900px;
+
+  margin: 30px auto 0;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 15px;
+
+  flex-wrap: wrap;
+}
+
+/* =========================
+   BOTÓN ACTUALIZAR
+========================= */
+
+.actualizar-btn {
+  padding: 13px 25px;
+
+  border: none;
+
+  background: linear-gradient(135deg, #35394a, #1f222e);
+
+  border-top: 2px solid #d8312a;
+
+  color: white;
+
+  font-family: "Gudea", sans-serif;
+
+  font-size: 14px;
+
+  cursor: pointer;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.actualizar-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   BOTÓN GESTIONAR INFERIOR
+========================= */
+
+.gestionar-final-btn {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 13px 25px;
+
+  background: rgba(31, 34, 46, 0.9);
+
+  border-top: 2px solid #d8312a;
+
+  color: white;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.gestionar-final-btn:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   ESPACIO PARA SCROLL
+========================= */
+
+.espacio-final {
+  height: 50px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  .usuarios-content {
+    padding: 35px 15px 80px;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header-actions {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .btn-gestionar {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+
+  .contador {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) {
+  .usuario-card {
+    padding: 18px;
+  }
+
+  .avatar {
+    width: 55px;
+
+    height: 55px;
+
+    min-width: 55px;
+
+    font-size: 22px;
+  }
+
+  .usuario-info h2 {
+    font-size: 18px;
+  }
+
+  .usuario-id {
+    position: static;
+
+    margin-left: auto;
+
+    align-self: flex-start;
+  }
+
+  .botones-finales {
+    flex-direction: column;
+  }
+
+  .actualizar-btn,
+  .gestionar-final-btn {
+    width: 100%;
+
+    box-sizing: border-box;
+  }
+}
+
+.cerrar-sesion-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 25px;
+  border: none;
+  border-top: 2px solid #d8312a;
+  background: linear-gradient(135deg, #35394a, #1f222e);
+  color: white;
+  font-family: "Gudea", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.cerrar-sesion-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.3);
+}

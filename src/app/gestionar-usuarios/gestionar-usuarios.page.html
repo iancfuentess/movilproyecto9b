@@ -1,0 +1,162 @@
+<main class="gestionar-content">
+
+  <!-- ENCABEZADO -->
+  <section class="encabezado">
+    <div>
+      <p class="subtitulo">ADMINISTRACIÓN</p>
+      <h1>Gestionar usuarios</h1>
+      <p class="descripcion">
+        Agrega o elimina usuarios del sistema
+      </p>
+    </div>
+
+    <a routerLink="/usuarios" class="btn-volver">
+      ← Ver usuarios
+    </a>
+  </section>
+
+
+  <!-- MENSAJE DEL SISTEMA -->
+  @if (mensaje) {
+  <div class="mensaje">
+    {{ mensaje }}
+  </div>
+  }
+
+
+  <!-- FORMULARIO PARA AGREGAR USUARIO -->
+  <section class="panel">
+
+    <h2>Agregar usuario</h2>
+
+    <form (ngSubmit)="agregarUsuario()">
+
+      <!-- NOMBRE -->
+      <div class="campo">
+        <label for="nombre">Nombre</label>
+
+        <input id="nombre" type="text" name="nombre" [(ngModel)]="nombre" placeholder="Nombre completo"
+          autocomplete="name" />
+      </div>
+
+
+      <!-- USUARIO -->
+      <div class="campo">
+        <label for="username">Usuario</label>
+
+        <input id="username" type="text" name="username" [(ngModel)]="username" placeholder="Usuario"
+          autocomplete="username" />
+      </div>
+
+
+      <!-- CORREO -->
+      <div class="campo">
+        <label for="email">Correo electrónico</label>
+
+        <input id="email" type="email" name="email" [(ngModel)]="email" placeholder="correo@ejemplo.com"
+          autocomplete="email" />
+      </div>
+
+
+      <!-- CONTRASEÑA -->
+      <div class="campo">
+        <label for="password">Contraseña</label>
+
+        <input id="password" type="password" name="password" [(ngModel)]="password" placeholder="Contraseña"
+          autocomplete="new-password" />
+      </div>
+
+
+      <!-- BOTÓN AGREGAR -->
+      <button type="submit" class="btn-agregar" [disabled]="cargando">
+        @if (cargando) {
+        Agregando usuario...
+        } @else {
+        ＋ Agregar usuario
+        }
+      </button>
+
+    </form>
+
+  </section>
+
+
+  <!-- LISTA DE USUARIOS -->
+  <section class="panel usuarios-panel">
+
+    <div class="usuarios-header">
+
+      <h2>Usuarios actuales</h2>
+
+      <button type="button" class="btn-actualizar" (click)="cargarUsuarios()">
+        ↻ Actualizar
+      </button>
+
+    </div>
+
+
+    <!-- MENSAJE DE CARGA -->
+    @if (cargando) {
+
+    <p class="estado">
+      Cargando usuarios...
+    </p>
+
+    } @else if (usuarios.length === 0) {
+
+    <p class="estado">
+      No hay usuarios registrados.
+    </p>
+
+    } @else {
+
+    <!-- RECORRER USUARIOS -->
+    @for (usuario of usuarios; track usuario.id) {
+
+    <article class="usuario-card">
+
+      <div class="usuario-info">
+
+        <h3>
+          {{ usuario.nombre }}
+        </h3>
+
+        <p class="username">
+          @{{ usuario.username }}
+        </p>
+
+        <p class="email">
+          {{ usuario.email }}
+        </p>
+
+        <span class="id">
+          ID #{{ usuario.id }}
+        </span>
+
+      </div>
+
+
+      <!-- BOTÓN ELIMINAR -->
+      <button type="button" class="btn-eliminar" (click)="eliminarUsuario(usuario.id)">
+        🗑 Eliminar
+      </button>
+
+    </article>
+
+    }
+
+    }
+
+  </section>
+
+
+  <!-- REGRESAR A LA VISTA DE USUARIOS -->
+  <div class="regresar">
+
+    <a routerLink="/usuarios" class="btn-regresar">
+      ← Regresar a usuarios
+    </a>
+
+  </div>
+
+</main>

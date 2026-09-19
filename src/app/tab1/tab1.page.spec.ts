@@ -1,10 +1,11 @@
-import { provideZonelessChangeDetection } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideIonicAngular } from '@ionic/angular';
+/// <reference types="jasmine" />
+import { provideZonelessChangeDetection } from "@angular/core";
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { provideIonicAngular } from "@ionic/angular";
 
-import { Tab1Page } from './tab1.page';
+import { Tab1Page } from "./tab1.page";
 
-describe('Tab1Page', () => {
+describe("Tab1Page", () => {
   let component: Tab1Page;
   let fixture: ComponentFixture<Tab1Page>;
 
@@ -19,7 +20,7 @@ describe('Tab1Page', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

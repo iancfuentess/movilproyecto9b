@@ -1,0 +1,145 @@
+<div class="usuarios-content">
+
+  <!-- ENCABEZADO -->
+  <section class="header">
+
+    <div class="header-info">
+
+      <p class="subtitle">
+        ADMINISTRACIÓN
+      </p>
+
+      <h1>
+        Usuarios registrados
+      </h1>
+
+      <p class="description">
+        Registro de usuarios disponibles en el sistema
+      </p>
+
+    </div>
+
+    <div class="header-actions">
+
+      <a routerLink="/gestionar-usuarios" class="btn-gestionar">
+        ⚙ Gestionar usuarios
+      </a>
+
+      <div class="contador">
+
+        <span>
+          USUARIOS
+        </span>
+
+        <strong>
+          {{ usuarios.length }}
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CARGANDO -->
+  @if (cargando) {
+
+  <div class="mensaje">
+    Cargando usuarios desde XAMPP...
+  </div>
+
+  }
+
+
+  <!-- ERROR -->
+  @if (error) {
+
+  <div class="mensaje error">
+    {{ error }}
+  </div>
+
+  }
+
+
+  <!-- SIN USUARIOS -->
+  @if (!cargando && !error && usuarios.length === 0) {
+
+  <div class="mensaje">
+    No hay usuarios registrados en la base de datos.
+  </div>
+
+  }
+
+
+  <!-- LISTA DE USUARIOS -->
+  <section class="usuarios-lista">
+
+    @for (usuario of usuarios; track usuario.id) {
+
+    <article class="usuario-card">
+
+      <div class="avatar">
+        {{ obtenerInicial(usuario.nombre) }}
+      </div>
+
+
+      <div class="usuario-info">
+
+        <h2>
+          {{ usuario.nombre }}
+        </h2>
+
+        <p class="username">
+          @{{ usuario.username }}
+        </p>
+
+        <p class="email">
+          {{ usuario.email }}
+        </p>
+
+      </div>
+
+
+      <div class="usuario-id">
+        ID #{{ usuario.id }}
+      </div>
+
+    </article>
+
+    }
+
+  </section>
+
+
+  <!-- BOTONES FINALES -->
+  <div class="botones-finales">
+
+    <button class="actualizar-btn" type="button" (click)="cargarUsuarios()">
+
+      Visualizar usuarios
+
+    </button>
+
+
+    <a routerLink="/gestionar-usuarios" class="gestionar-final-btn">
+
+      ⚙ Gestionar usuarios
+
+    </a>
+
+
+    <!-- CERRAR SESIÓN -->
+    <button class="cerrar-sesion-btn" type="button" (click)="cerrarSesion()">
+
+      Cerrar sesión
+
+    </button>
+
+  </div>
+
+
+  <!-- ESPACIO FINAL PARA SCROLL -->
+  <div class="espacio-final"></div>
+
+</div>

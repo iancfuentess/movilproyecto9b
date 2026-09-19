@@ -260,3 +260,19 @@
     width: 30px;
   }
 }
+
+
+.login-error {
+  position: absolute;
+  top: 155px;
+  left: 40px;
+  right: 40px;
+  color: #ff8ca6 !important;
+  font-size: 11px !important;
+  text-align: center !important;
+}
+
+input[disabled] {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
