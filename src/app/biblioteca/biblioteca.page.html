@@ -1,0 +1,169 @@
+<ion-content [fullscreen]="true" class="biblioteca-content">
+  <main class="biblioteca-page">
+
+
+    <!-- ENCABEZADO -->
+    <header class="page-header">
+      <div class="header-top">
+
+        <div>
+          <span class="eyebrow">BOOKTRACK</span>
+          <h1>Biblioteca</h1>
+          <p>Organiza tu próxima lectura.</p>
+        </div>
+
+        <div class="booktrack-header-actions">
+
+          <a routerLink="/mis-lecturas" class="reading-button">
+            Mis lecturas
+          </a>
+
+          <!-- CONTENEDOR DEL BOTÓN Y MENÚ -->
+          <div class="booktrack-menu-wrapper">
+
+            <button type="button" class="booktrack-menu-button" (click)="alternarMenu()"
+              [attr.aria-expanded]="menuAbierto" aria-controls="booktrack-menu">
+              ☰ Menú
+            </button>
+
+            <!-- MENÚ FLOTANTE -->
+            @if (menuAbierto) {
+            <nav id="booktrack-menu" class="booktrack-menu" aria-label="Navegación principal">
+
+              <div class="booktrack-menu-user">
+                <strong>
+                  {{ usuarioActual?.nombre || usuarioActual?.username }}
+                </strong>
+
+                <span>{{ usuarioActual?.rol }}</span>
+              </div>
+
+              <a routerLink="/biblioteca" (click)="cerrarMenu()">
+                Biblioteca
+              </a>
+
+              <a routerLink="/mis-lecturas" (click)="cerrarMenu()">
+                Mis lecturas
+              </a>
+
+              @if (puedeVerUsuarios) {
+              <a routerLink="/usuarios" (click)="cerrarMenu()">
+                Usuarios
+              </a>
+              }
+
+              @if (esAdministrador) {
+              <a routerLink="/gestionar-usuarios" (click)="cerrarMenu()">
+                Gestionar usuarios
+              </a>
+
+              <a routerLink="/actividad" (click)="cerrarMenu()">
+                Historial de actividad
+              </a>
+              }
+
+              <button type="button" class="booktrack-logout-button" [disabled]="cerrandoSesion"
+                (click)="cerrarSesion()">
+                {{ cerrandoSesion ? "Cerrando sesión..." : "↪ Cerrar sesión" }}
+              </button>
+
+            </nav>
+            }
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- BUSCADOR -->
+    <section class="search-section">
+      <div class="search-box">
+        <span class="search-icon">⌕</span>
+
+        <input type="text" placeholder="Buscar por título o autor..." [(ngModel)]="busqueda" />
+
+        @if (busqueda) {
+        <button type="button" class="clear-search" (click)="busqueda = ''" aria-label="Limpiar búsqueda">
+          ×
+        </button>
+        }
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS -->
+    <section class="genres">
+      @for (genero of generos; track genero) {
+      <button type="button" class="genre-button" [class.active]="generoSeleccionado === genero"
+        (click)="seleccionarGenero(genero)">
+        {{ genero }}
+      </button>
+      }
+    </section>
+
+    <!-- INFORMACIÓN -->
+    <section class="catalog-info">
+      <div>
+        <h2>Explorar libros</h2>
+        <p>{{ librosFiltrados.length }} libros disponibles</p>
+      </div>
+    </section>
+
+    <!-- CUADRÍCULA -->
+    @if (loading) {
+    <section class="empty-state">
+      <div class="empty-icon">BT</div>
+      <h3>Cargando biblioteca...</h3>
+      <p>Estamos preparando tus próximas lecturas.</p>
+    </section>
+
+    } @else if (errorMessage) {
+    <section class="empty-state">
+      <div class="empty-icon">!</div>
+      <h3>No pudimos cargar la biblioteca</h3>
+      <p>{{ errorMessage }}</p>
+    </section>
+
+    } @else if (librosFiltrados.length > 0) {
+    <section class="books-grid">
+      @for (libro of librosFiltrados; track libro.id) {
+      <article class="book-card">
+
+        <div class="book-cover" [class.cover-1]="libro.id % 6 === 1" [class.cover-2]="libro.id % 6 === 2"
+          [class.cover-3]="libro.id % 6 === 3" [class.cover-4]="libro.id % 6 === 4" [class.cover-5]="libro.id % 6 === 5"
+          [class.cover-6]="libro.id % 6 === 0">
+          @if (libro.portada_url && !libro.portadaError) {
+          <img class="cover-image" [src]="libro.portada_url" [alt]="'Portada de ' + libro.titulo"
+            (error)="portadaNoDisponible(libro)" />
+          } @else {
+          <div class="cover-decoration"></div>
+          <span class="cover-title">{{ libro.titulo }}</span>
+          <span class="cover-brand">BOOKTRACK</span>
+          }
+        </div>
+
+        <div class="book-info">
+          <span class="book-genre">{{ libro.genero }}</span>
+          <h3>{{ libro.titulo }}</h3>
+          <p class="book-author">{{ libro.autor }}</p>
+
+          <button type="button" class="add-button" (click)="agregarLibro(libro)">
+            <span>+</span>
+            Mi lista
+          </button>
+        </div>
+
+      </article>
+      }
+    </section>
+
+    } @else {
+    <section class="empty-state">
+      <div class="empty-icon">⌕</div>
+      <h3>No encontramos libros</h3>
+      <p>Intenta buscar otro título, autor o categoría.</p>
+    </section>
+    }
+
+  </main>
+</ion-content>

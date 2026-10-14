@@ -1,14 +1,20 @@
 {
 	"appId": "io.ionic.demo.pg.cap.ng",
-	"appName": "Photo Gallery Cap Ng",
-	"npmClient": "npm",
+	"appName": "proyecto9b",
 	"webDir": "www",
+	"server": {
+		"androidScheme": "http",
+		"hostname": "localhost",
+		"cleartext": true
+	},
 	"packageClassList": [
+		"BluetoothLe",
 		"AppPlugin",
 		"CAPCameraPlugin",
 		"FilesystemPlugin",
 		"HapticsPlugin",
 		"KeyboardPlugin",
+		"CAPNetworkPlugin",
 		"PreferencesPlugin",
 		"SplashScreenPlugin",
 		"StatusBarPlugin"

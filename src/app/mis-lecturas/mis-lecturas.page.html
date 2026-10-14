@@ -1,0 +1,305 @@
+<ion-content [scrollY]="true" class="booktrack-page">
+  <main class="reading-shell">
+
+    <!-- ENCABEZADO -->
+    <header class="reading-header">
+      <a routerLink="/biblioteca" class="back-link">
+        ← Volver
+      </a>
+
+      <div class="eyebrow">BOOKTRACK</div>
+
+      <h1>Mis lecturas</h1>
+
+      <p>Tu espacio personal para disfrutar cada página.</p>
+    </header>
+
+    <!-- PESTAÑAS -->
+    <nav class="reading-tabs" aria-label="Estado de las lecturas">
+
+      <button type="button" [class.active]="estado === 'pendientes'" (click)="seleccionarEstado('pendientes')">
+        Pendientes
+      </button>
+
+      <button type="button" [class.active]="estado === 'leyendo'" (click)="seleccionarEstado('leyendo')">
+        Leyendo
+      </button>
+
+      <button type="button" [class.active]="estado === 'terminados'" (click)="seleccionarEstado('terminados')">
+        Terminados
+      </button>
+
+    </nav>
+
+    <!-- CARGANDO -->
+    @if (loading) {
+    <section class="empty-state">
+      <div class="empty-icon">📖</div>
+      <h2>Cargando tus lecturas...</h2>
+      <p>Estamos preparando tu biblioteca personal.</p>
+    </section>
+    }
+
+    <!-- ERROR GENERAL -->
+    @else if (errorMessage) {
+    <section class="empty-state">
+      <div class="empty-icon">!</div>
+      <h2>Ocurrió un problema</h2>
+      <p>{{ errorMessage }}</p>
+    </section>
+    }
+
+    <!-- LIBROS -->
+    @else if (librosFiltrados.length > 0) {
+
+    <section class="reading-grid">
+
+      @for (libro of librosFiltrados; track libro.usuario_libro_id) {
+
+      <article class="reading-card">
+
+        <!-- PORTADA -->
+        <div class="reading-cover" [class.cover-1]="libro.id % 6 === 1" [class.cover-2]="libro.id % 6 === 2"
+          [class.cover-3]="libro.id % 6 === 3" [class.cover-4]="libro.id % 6 === 4" [class.cover-5]="libro.id % 6 === 5"
+          [class.cover-6]="libro.id % 6 === 0">
+
+          @if (libro.portada_url && !libro.portadaError) {
+
+          <img class="cover-image" [src]="libro.portada_url" [alt]="'Portada de ' + libro.titulo"
+            (error)="portadaNoDisponible(libro)" />
+
+          } @else {
+
+          <div class="cover-decoration"></div>
+
+          <span class="cover-title">
+            {{ libro.titulo }}
+          </span>
+
+          <span class="cover-brand">
+            BOOKTRACK
+          </span>
+
+          }
+
+        </div>
+
+        <!-- INFORMACIÓN -->
+        <div class="reading-info">
+
+          <span class="book-genre">
+            {{ libro.genero }}
+          </span>
+
+          <h2>{{ libro.titulo }}</h2>
+
+          <p class="book-author">
+            {{ libro.autor }}
+          </p>
+
+          <!-- CALIFICACIÓN Y PÁGINAS -->
+          <div class="reading-meta">
+
+            @if (libro.total_paginas !== null) {
+            <span>{{ libro.total_paginas }} páginas</span>
+            }
+
+          </div>
+
+          <!-- BARRA DE PROGRESO -->
+          @if (libro.total_paginas !== null) {
+
+          <div class="progress-section">
+
+            <div class="progress-text">
+
+              <span>Progreso</span>
+
+              <span>
+                {{ libro.pagina_actual }} /
+                {{ libro.total_paginas }}
+              </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+              <div class="progress-fill" [style.width.%]="libro.total_paginas > 0
+                        ? (libro.pagina_actual / libro.total_paginas) * 100
+                        : 0">
+              </div>
+
+            </div>
+
+          </div>
+
+          }
+
+          <!-- COMENZAR LECTURA -->
+          @if (libro.estado === "pendiente") {
+
+          <button type="button" class="start-reading-button" [disabled]="actualizandoLibroId !== null"
+            (click)="comenzarLectura(libro)">
+
+            {{ actualizandoLibroId === libro.usuario_libro_id
+            ? 'Iniciando...'
+            : 'Comenzar lectura' }}
+
+          </button>
+
+          }
+
+          <!-- EDITAR PROGRESO -->
+          @if (libro.estado === "leyendo") {
+
+          <div class="progress-editor">
+
+            <label [for]="'pagina-' + libro.usuario_libro_id">
+              Página actual
+            </label>
+
+            <div class="progress-editor-row">
+
+              <input #paginaInput [id]="'pagina-' + libro.usuario_libro_id" type="number" inputmode="numeric" min="0"
+                step="1" [max]="libro.total_paginas ?? undefined" [value]="libro.pagina_actual"
+                [disabled]="actualizandoLibroId !== null" />
+
+              <button type="button" class="save-progress-button" [disabled]="actualizandoLibroId !== null"
+                (click)="guardarProgreso(libro, paginaInput.value)">
+
+                {{ actualizandoLibroId === libro.usuario_libro_id
+                ? 'Guardando...'
+                : 'Guardar' }}
+
+              </button>
+
+            </div>
+
+            @if (progresoMensaje[libro.usuario_libro_id]) {
+
+            <p class="progress-feedback progress-feedback-success" role="status">
+              {{ progresoMensaje[libro.usuario_libro_id] }}
+            </p>
+
+            }
+
+          </div>
+
+          }
+
+          <!-- TERMINAR LECTURA -->
+          @if (libro.estado === "leyendo") {
+
+          <button type="button" class="finish-reading-button" [disabled]="actualizandoLibroId !== null"
+            (click)="terminarLectura(libro)">
+
+            {{ actualizandoLibroId === libro.usuario_libro_id
+            ? 'Procesando...'
+            : 'Terminar lectura' }}
+
+          </button>
+
+          }
+
+          <!-- ERRORES DE OPERACIONES -->
+          @if (progresoError[libro.usuario_libro_id]) {
+
+          <p class="progress-feedback progress-feedback-error" role="alert">
+            {{ progresoError[libro.usuario_libro_id] }}
+          </p>
+
+          }
+
+          <!-- ELIMINAR DE MI LISTA -->
+          <button type="button" class="delete-reading-button" [disabled]="actualizandoLibroId !== null"
+            (click)="solicitarEliminar(libro)">
+
+            Eliminar de Mi lista
+
+          </button>
+
+        </div>
+
+      </article>
+
+      }
+
+    </section>
+
+    }
+
+    <!-- SIN LIBROS -->
+    @else {
+
+    <section class="empty-state">
+
+      <div class="empty-icon">📖</div>
+
+      <h2>{{ tituloVacio }}</h2>
+
+      <p>{{ descripcionVacia }}</p>
+
+    </section>
+
+    }
+
+  </main>
+
+  <!-- VENTANA DE CONFIRMACIÓN -->
+  @if (libroParaEliminar) {
+
+  <div class="delete-modal-backdrop">
+
+    <section class="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title"
+      aria-describedby="delete-modal-description">
+
+      <div class="delete-modal-icon">
+        🗑️
+      </div>
+
+      <h2 id="delete-modal-title">
+        ¿Eliminar de Mi lista?
+      </h2>
+
+      <p id="delete-modal-description">
+
+        ¿Quieres eliminar
+
+        <strong>{{ libroParaEliminar.titulo }}</strong>
+
+        de tus lecturas?
+
+      </p>
+
+      <p class="delete-modal-warning">
+        Se perderá el progreso guardado de este libro.
+        El libro seguirá disponible en Biblioteca.
+      </p>
+
+      <div class="delete-modal-actions">
+
+        <button type="button" class="delete-cancel-button" [disabled]="actualizandoLibroId !== null"
+          (click)="cancelarEliminar()">
+
+          Cancelar
+
+        </button>
+
+        <button type="button" class="delete-confirm-button" [disabled]="actualizandoLibroId !== null"
+          (click)="confirmarEliminar()">
+
+          {{ actualizandoLibroId !== null
+          ? 'Eliminando...'
+          : 'Sí, eliminar' }}
+
+        </button>
+
+      </div>
+
+    </section>
+
+  </div>
+
+  }
+
+</ion-content>

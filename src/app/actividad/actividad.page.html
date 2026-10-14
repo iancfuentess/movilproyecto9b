@@ -1,0 +1,99 @@
+<ion-content [scrollY]="true">
+  <main class="actividad-page">
+
+    <!-- ENCABEZADO -->
+    <header class="page-header">
+
+      <a routerLink="/biblioteca" class="back-link">
+        ← Volver a Biblioteca
+      </a>
+
+      <div class="header-row">
+        <div class="header-copy">
+          <h1>Historial de actividad</h1>
+          <p>Movimientos recientes del sistema.</p>
+        </div>
+
+        <button type="button" class="refresh-button" (click)="actualizarActividad()" [disabled]="cargando">
+          {{ cargando ? "Actualizando..." : "↻ Actualizar" }}
+        </button>
+      </div>
+
+    </header>
+
+    <!-- CARGANDO -->
+    @if (cargando) {
+    <div class="estado">
+      Cargando actividad...
+    </div>
+    }
+
+    <!-- ERROR -->
+    @if (error && !cargando) {
+    <div class="mensaje-error" role="alert">
+      {{ error }}
+    </div>
+    }
+
+    <!-- SIN REGISTROS -->
+    @if (!cargando && !error && actividades.length === 0) {
+    <div class="estado">
+      Todavía no hay actividad registrada.
+    </div>
+    }
+
+    <!-- LISTA -->
+    @if (!cargando && !error && actividades.length > 0) {
+
+    <section class="activity-list">
+
+      @for (actividad of actividades; track actividad.id) {
+
+      <article class="activity-item">
+
+        <div class="activity-icon" [class.icon-login]="actividad.accion === 'LOGIN'"
+          [class.icon-create]="actividad.accion === 'CREAR_USUARIO'"
+          [class.icon-delete]="actividad.accion === 'ELIMINAR_USUARIO'">
+          @if (actividad.accion === "LOGIN") {
+          <span>↪</span>
+          } @else if (actividad.accion === "CREAR_USUARIO") {
+          <span>+</span>
+          } @else if (actividad.accion === "ELIMINAR_USUARIO") {
+          <span>−</span>
+          } @else {
+          <span>•</span>
+          }
+        </div>
+
+        <div class="activity-info">
+
+          <div class="activity-top">
+            <strong>
+              {{ actividad.nombre || actividad.username }}
+            </strong>
+
+            <span class="activity-date">
+              {{ actividad.fecha }}
+            </span>
+          </div>
+
+          <p class="activity-description">
+            {{ actividad.descripcion }}
+          </p>
+
+          <span class="activity-username">
+            @{{ actividad.username }}
+          </span>
+
+        </div>
+
+      </article>
+
+      }
+
+    </section>
+
+    }
+
+  </main>
+</ion-content>

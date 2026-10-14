@@ -1,0 +1,848 @@
+:host {
+  display: block;
+}
+
+ion-content {
+  --background: #f8f9fc;
+}
+
+.reading-shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: max(24px, env(safe-area-inset-top)) 20px
+    calc(36px + env(safe-area-inset-bottom));
+  color: #303348;
+}
+
+/* ==========================================
+   ENCABEZADO
+   ========================================== */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 30px;
+  text-decoration: none;
+  color: #7467d9;
+  font-weight: 700;
+}
+
+.eyebrow {
+  color: #7467d9;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 800;
+}
+
+h1 {
+  margin: 9px 0;
+  font-size: clamp(29px, 8vw, 39px);
+  letter-spacing: -0.8px;
+  font-weight: 800;
+}
+
+.reading-header p {
+  color: #777b91;
+  line-height: 1.5;
+}
+
+/* ==========================================
+   PESTAÑAS
+   ========================================== */
+
+.reading-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 5px;
+  margin: 30px 0 22px;
+  border-radius: 18px;
+  background: #eaeaf3;
+}
+
+.reading-tabs button {
+  padding: 13px 4px;
+  border: 0;
+  border-radius: 14px;
+  background: transparent;
+  color: #686b80;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.reading-tabs button.active {
+  background: #fff;
+  color: #6757c8;
+  box-shadow: 0 3px 12px #34304a0c;
+}
+
+/* ==========================================
+   CUADRÍCULA DE LECTURAS
+   ========================================== */
+
+.reading-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* ==========================================
+   TARJETA
+   ========================================== */
+
+.reading-card {
+  display: grid;
+  grid-template-columns: 145px minmax(0, 1fr);
+  gap: 20px;
+
+  padding: 16px;
+
+  background: #ffffff;
+
+  border: 1px solid #eeeef6;
+  border-radius: 24px;
+
+  box-shadow: 0 12px 35px #30334808;
+}
+
+/* ==========================================
+   PORTADA
+   ========================================== */
+
+.reading-cover {
+  position: relative;
+
+  width: 100%;
+  aspect-ratio: 2 / 3;
+
+  overflow: hidden;
+
+  border-radius: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px;
+
+  color: white;
+}
+
+/* Fondos de respaldo */
+
+.cover-1 {
+  background: #65469a;
+}
+
+.cover-2 {
+  background: #353842;
+}
+
+.cover-3 {
+  background: #78a8bd;
+}
+
+.cover-4 {
+  background: #d99a4c;
+}
+
+.cover-5 {
+  background: #a93643;
+}
+
+.cover-6 {
+  background: #4f887b;
+}
+
+/* Imagen real */
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  border-radius: 10px;
+
+  position: relative;
+  z-index: 2;
+}
+
+/* Portada automática */
+
+.cover-decoration {
+  position: absolute;
+
+  width: 90px;
+  height: 90px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+
+  top: -25px;
+  right: -25px;
+}
+
+.cover-title {
+  position: relative;
+  z-index: 1;
+
+  text-align: center;
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.cover-brand {
+  position: absolute;
+
+  bottom: 12px;
+  left: 0;
+  right: 0;
+
+  text-align: center;
+
+  font-size: 7px;
+  letter-spacing: 2px;
+  font-weight: 800;
+
+  opacity: 0.8;
+}
+
+/* ==========================================
+   INFORMACIÓN
+   ========================================== */
+
+.reading-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 4px 0;
+}
+
+.book-genre {
+  color: #7467d9;
+
+  font-size: 10px;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.reading-info h2 {
+  margin: 7px 0 4px;
+
+  font-size: 20px;
+  line-height: 1.2;
+
+  color: #303348;
+}
+
+.book-author {
+  margin: 0;
+
+  color: #8a8da0;
+
+  font-size: 13px;
+}
+
+.reading-meta {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 15px;
+
+  color: #686b80;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   PROGRESO
+   ========================================== */
+
+.progress-section {
+  margin-top: 18px;
+}
+
+.progress-text {
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+
+  color: #777b91;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: #ececf5;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #7467d9;
+
+  transition: width 0.25s ease;
+}
+
+/* ==========================================
+   ESTADO
+   ========================================== */
+
+.status-badge {
+  align-self: flex-start;
+
+  margin-top: auto;
+  padding: 8px 12px;
+
+  border-radius: 999px;
+
+  background: #f0edff;
+  color: #6757c8;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* ==========================================
+   ESTADO VACÍO
+   ========================================== */
+
+.empty-state {
+  background: white;
+
+  border: 1px solid #eeeef6;
+  border-radius: 26px;
+
+  padding: 48px 24px;
+
+  text-align: center;
+
+  box-shadow: 0 12px 35px #30334808;
+}
+
+.empty-icon {
+  display: grid;
+  place-items: center;
+
+  width: 74px;
+  height: 74px;
+
+  margin: 0 auto 20px;
+
+  border-radius: 22px;
+
+  background: #f0edff;
+
+  font-size: 32px;
+}
+
+.empty-state h2 {
+  font-size: 21px;
+  line-height: 1.3;
+}
+
+.empty-state p {
+  color: #777b91;
+
+  line-height: 1.65;
+
+  font-size: 14px;
+}
+
+/* ==========================================
+   TABLET / MÓVIL
+   ========================================== */
+
+@media (max-width: 760px) {
+  .reading-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .reading-shell {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .reading-card {
+    grid-template-columns: 105px minmax(0, 1fr);
+    gap: 14px;
+
+    padding: 12px;
+
+    border-radius: 20px;
+  }
+
+  .reading-cover {
+    border-radius: 13px;
+  }
+
+  .reading-info h2 {
+    font-size: 17px;
+  }
+
+  .reading-tabs button {
+    font-size: 11px;
+  }
+
+  .reading-meta {
+    gap: 7px;
+  }
+}
+
+.start-reading-button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 13px 18px;
+
+  border: 0;
+  border-radius: 14px;
+
+  background: #6c5ce7;
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.start-reading-button:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.start-reading-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.start-reading-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Editor de avance: conserva las tarjetas y colores existentes. */
+.progress-editor {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.progress-editor label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #5c5670;
+}
+.progress-editor-row {
+  display: flex;
+  gap: 8px;
+  align-items: stretch;
+  min-width: 0;
+}
+.progress-editor-row input {
+  min-width: 0;
+  flex: 1;
+  width: 60px;
+  padding: 10px 9px;
+  border: 1px solid #ded9ee;
+  border-radius: 12px;
+  background: #fff;
+  color: #282238;
+  font: inherit;
+  font-size: 14px;
+}
+.progress-editor-row input:focus {
+  outline: 2px solid #bcb0fa;
+  outline-offset: 1px;
+}
+.save-progress-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: #6c5ce7;
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.save-progress-button:disabled,
+.progress-editor-row input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.progress-feedback {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.progress-feedback-error {
+  color: #b42318;
+}
+.progress-feedback-success {
+  color: #277451;
+}
+
+/* Acción para completar una lectura, coherente con el estilo BookTrack. */
+.finish-reading-button {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px 16px;
+  border: 1px solid #6c5ce7;
+  border-radius: 12px;
+  background: #f3f0ff;
+  color: #5b4bce;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.finish-reading-button:hover:not(:disabled) {
+  background: #e9e3ff;
+}
+.finish-reading-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   ELIMINAR DE MI LISTA
+   ========================================== */
+
+.delete-reading-button {
+  width: 100%;
+  margin-top: 12px;
+  padding: 11px 14px;
+
+  border: 1px solid #f1d5dc;
+  border-radius: 12px;
+
+  background: #fff8fa;
+  color: #b44b64;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.delete-reading-button:hover:not(:disabled) {
+  background: #ffeef2;
+}
+
+.delete-reading-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ==========================================
+   VENTANA DE CONFIRMACIÓN
+   ========================================== */
+
+.delete-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(32, 30, 48, 0.55);
+}
+
+.delete-modal {
+  width: 100%;
+  max-width: 420px;
+
+  padding: 28px;
+
+  border-radius: 24px;
+  background: #ffffff;
+
+  box-shadow: 0 24px 70px rgba(25, 20, 48, 0.22);
+
+  text-align: center;
+}
+
+.delete-modal-icon {
+  display: grid;
+  place-items: center;
+
+  width: 64px;
+  height: 64px;
+
+  margin: 0 auto 16px;
+
+  border-radius: 20px;
+  background: #fff0f3;
+
+  font-size: 27px;
+}
+
+.delete-modal h2 {
+  margin: 0 0 12px;
+
+  color: #303348;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.delete-modal p {
+  color: #777b91;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.delete-modal-warning {
+  padding: 12px;
+  border-radius: 12px;
+
+  background: #fff7f8;
+  color: #a45465 !important;
+
+  font-size: 12px !important;
+}
+
+.delete-modal-actions {
+  display: flex;
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+.delete-modal-actions button {
+  flex: 1;
+
+  padding: 13px 10px;
+
+  border: 0;
+  border-radius: 12px;
+
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.delete-cancel-button {
+  background: #f0edff;
+  color: #6757c8;
+}
+
+.delete-confirm-button {
+  background: #c34b65;
+  color: #ffffff;
+}
+
+.delete-modal-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .delete-modal {
+    padding: 22px;
+  }
+
+  .delete-modal h2 {
+    font-size: 20px;
+  }
+}
+
+/* ==========================================
+   BOOKTRACK - MEJORAS DE INTERFAZ
+   ========================================== */
+
+/* Separación entre datos del libro y progreso */
+.reading-meta {
+  margin-top: 16px;
+  gap: 10px;
+  color: #777b91;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* Editor de página actual */
+.progress-editor {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.progress-editor label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #55536e;
+}
+
+.progress-editor-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* Campo numérico personalizado */
+.progress-editor-row input.page-number-input {
+  flex: 1;
+  min-width: 0;
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+
+  border: 1px solid #ded9f3;
+  border-radius: 15px;
+
+  background: #faf9ff;
+  color: #303348;
+
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  text-align: center;
+
+  outline: none;
+  box-shadow: none;
+
+  appearance: textfield;
+  -moz-appearance: textfield;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+/* Quitar flechas negras de Chrome, Edge y Safari */
+.progress-editor-row input.page-number-input::-webkit-inner-spin-button,
+.progress-editor-row input.page-number-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+/* Resaltado al seleccionar el campo */
+.progress-editor-row input.page-number-input:focus {
+  border-color: #7467d9;
+  background: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(116, 103, 217, 0.14);
+}
+
+/* Botón Guardar */
+.save-progress-button {
+  flex-shrink: 0;
+  min-height: 48px;
+  padding: 0 18px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #6c5ce7;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.save-progress-button:hover:not(:disabled) {
+  background: #5947d7;
+  transform: translateY(-1px);
+}
+
+.save-progress-button:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.save-progress-button:disabled,
+.progress-editor-row input.page-number-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Mejorar la separación de acciones */
+.finish-reading-button {
+  margin-top: 14px;
+}
+
+.delete-reading-button {
+  margin-top: 14px;
+}
+
+/* Adaptación a pantallas pequeñas */
+@media (max-width: 480px) {
+  .progress-editor-row {
+    gap: 8px;
+  }
+
+  .progress-editor-row input.page-number-input {
+    height: 45px;
+    padding: 0 10px;
+    font-size: 15px;
+  }
+
+  .save-progress-button {
+    min-height: 45px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+}
+
+/* ==========================================
+   FLECHAS DEL CAMPO PÁGINA ACTUAL
+   ========================================== */
+
+/* Apariencia del campo */
+.progress-editor-row input[type="number"] {
+  background-color: #ffffff !important;
+  color: #303348 !important;
+  color-scheme: light;
+}
+
+/* Controles numéricos del navegador */
+.progress-editor-row input[type="number"]::-webkit-inner-spin-button,
+.progress-editor-row input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  filter: invert(1);
+  cursor: pointer;
+}

@@ -1,145 +1,215 @@
-<div class="usuarios-content">
+<ion-content [scrollY]="true" class="booktrack-content">
+  <main class="usuarios-page">
 
-  <!-- ENCABEZADO -->
-  <section class="header">
+    <!-- ENCABEZADO -->
+    <header class="page-header">
+      <div class="header-copy">
+        <a routerLink="/biblioteca" class="back-link">
+          ← Volver a Biblioteca
+        </a>
 
-    <div class="header-info">
+        <h1>Usuarios registrados</h1>
+      </div>
 
-      <p class="subtitle">
-        ADMINISTRACIÓN
-      </p>
+      <div class="header-actions">
+        @if (puedeGestionarUsuarios()) {
+        <a routerLink="/gestionar-usuarios" class="action-link primary-link">
+          Gestionar usuarios
+        </a>
+        }
 
-      <h1>
-        Usuarios registrados
-      </h1>
+        @if (puedeVerActividad()) {
+        <a routerLink="/actividad" class="action-link secondary-link">
+          Historial de actividad
+        </a>
+        }
+      </div>
+    </header>
 
-      <p class="description">
-        Registro de usuarios disponibles en el sistema
-      </p>
+    <!-- RESUMEN -->
+    <section class="summary-grid">
 
-    </div>
-
-    <div class="header-actions">
-
-      <a routerLink="/gestionar-usuarios" class="btn-gestionar">
-        ⚙ Gestionar usuarios
-      </a>
-
-      <div class="contador">
-
-        <span>
-          USUARIOS
+      <article class="summary-card">
+        <span class="summary-label">
+          Usuarios registrados
         </span>
 
-        <strong>
+        <strong class="summary-number">
           {{ usuarios.length }}
         </strong>
 
+        <span class="summary-caption">
+          Total de usuarios
+        </span>
+      </article>
+
+      <article class="summary-card session-card">
+        <span class="summary-label">
+          Sesión actual
+        </span>
+
+        @if (usuarioActual) {
+        <div class="session-details">
+
+          <div class="session-avatar">
+            {{
+            obtenerInicial(
+            usuarioActual.nombre || usuarioActual.username
+            )
+            }}
+          </div>
+
+          <div class="session-text">
+            <strong>
+              {{ usuarioActual.nombre || usuarioActual.username }}
+            </strong>
+
+            <span>
+              @{{ usuarioActual.username }}
+            </span>
+
+            <small>
+              {{ usuarioActual.rol }}
+            </small>
+          </div>
+
+        </div>
+        }
+      </article>
+
+    </section>
+
+    <!-- BUSCADOR Y ACTUALIZACIÓN -->
+    <section class="tools-section">
+
+      <div class="search-box">
+        <span class="search-icon" aria-hidden="true">
+          ⌕
+        </span>
+
+        <input type="text" [(ngModel)]="busqueda" placeholder="Buscar por nombre, usuario, correo o rol..."
+          aria-label="Buscar usuarios" />
+
+        @if (busqueda) {
+        <button type="button" class="clear-search" aria-label="Limpiar búsqueda" (click)="busqueda = ''">
+          ×
+        </button>
+        }
       </div>
 
+      <button type="button" class="refresh-button" [disabled]="cargando" (click)="actualizarUsuarios()">
+        {{ cargando ? "Actualizando..." : "↻ Actualizar" }}
+      </button>
+
+    </section>
+
+    <!-- MENSAJES DE ERROR O CACHÉ -->
+    @if (error) {
+    <div class="notice" [class.notice-cache]="usandoCache" role="status">
+      {{ error }}
     </div>
+    }
 
-  </section>
+    <!-- CARGANDO USUARIOS -->
+    @if (cargando) {
 
+    <section class="empty-state">
+      <div class="empty-icon">◌</div>
 
-  <!-- CARGANDO -->
-  @if (cargando) {
+      <h3>Cargando usuarios...</h3>
 
-  <div class="mensaje">
-    Cargando usuarios desde XAMPP...
-  </div>
+      <p>
+        Consultando la información del sistema.
+      </p>
+    </section>
 
-  }
+    } @else if (usuariosFiltrados.length > 0) {
 
+    <!-- TARJETAS DE USUARIOS -->
+    <section class="users-grid">
 
-  <!-- ERROR -->
-  @if (error) {
+      @for (usuario of usuariosFiltrados; track usuario.id) {
 
-  <div class="mensaje error">
-    {{ error }}
-  </div>
+      <article class="user-card">
 
-  }
+        <!-- AVATAR E ID -->
+        <div class="card-top">
 
+          <div class="user-avatar">
+            {{
+            obtenerInicial(
+            usuario.nombre || usuario.username
+            )
+            }}
+          </div>
 
-  <!-- SIN USUARIOS -->
-  @if (!cargando && !error && usuarios.length === 0) {
+          <span class="user-id">
+            ID #{{ usuario.id }}
+          </span>
 
-  <div class="mensaje">
-    No hay usuarios registrados en la base de datos.
-  </div>
+        </div>
 
-  }
+        <!-- INFORMACIÓN DEL USUARIO -->
+        <div class="user-info">
 
+          <h3>
+            {{ usuario.nombre || usuario.username }}
+          </h3>
 
-  <!-- LISTA DE USUARIOS -->
-  <section class="usuarios-lista">
+          <p class="username">
+            @{{ usuario.username }}
+          </p>
 
-    @for (usuario of usuarios; track usuario.id) {
+          <p class="email">
+            {{ usuario.email }}
+          </p>
 
-    <article class="usuario-card">
+        </div>
 
-      <div class="avatar">
-        {{ obtenerInicial(usuario.nombre) }}
-      </div>
+        <!-- ROL DEL USUARIO -->
+        <div class="card-footer">
 
+          <span class="role-badge" [class.role-admin]="obtenerRol(usuario) === 'Administrador'"
+            [class.role-editor]="obtenerRol(usuario) === 'Editor'">
+            {{ obtenerRol(usuario) }}
+          </span>
 
-      <div class="usuario-info">
+        </div>
 
-        <h2>
-          {{ usuario.nombre }}
-        </h2>
+      </article>
 
-        <p class="username">
-          @{{ usuario.username }}
-        </p>
+      }
 
-        <p class="email">
-          {{ usuario.email }}
-        </p>
+    </section>
 
-      </div>
+    } @else {
 
+    <!-- SIN RESULTADOS -->
+    <section class="empty-state">
 
-      <div class="usuario-id">
-        ID #{{ usuario.id }}
-      </div>
+      <div class="empty-icon">⌕</div>
 
-    </article>
+      @if (busqueda) {
+
+      <h3>No encontramos usuarios</h3>
+
+      <p>
+        Prueba con otro nombre, correo o rol.
+      </p>
+
+      } @else {
+
+      <h3>No hay usuarios para mostrar</h3>
+
+      <p>
+        Verifica la conexión o actualiza la lista.
+      </p>
+
+      }
+
+    </section>
 
     }
 
-  </section>
-
-
-  <!-- BOTONES FINALES -->
-  <div class="botones-finales">
-
-    <button class="actualizar-btn" type="button" (click)="cargarUsuarios()">
-
-      Visualizar usuarios
-
-    </button>
-
-
-    <a routerLink="/gestionar-usuarios" class="gestionar-final-btn">
-
-      ⚙ Gestionar usuarios
-
-    </a>
-
-
-    <!-- CERRAR SESIÓN -->
-    <button class="cerrar-sesion-btn" type="button" (click)="cerrarSesion()">
-
-      Cerrar sesión
-
-    </button>
-
-  </div>
-
-
-  <!-- ESPACIO FINAL PARA SCROLL -->
-  <div class="espacio-final"></div>
-
-</div>
+  </main>
+</ion-content>

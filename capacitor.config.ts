@@ -1,9 +1,15 @@
-import { CapacitorConfig } from '@capacitor/cli';
+import type { CapacitorConfig } from "@capacitor/cli";
+
 const config: CapacitorConfig = {
   appId: "io.ionic.demo.pg.cap.ng",
-  appName: "Photo Gallery Cap Ng",
-  npmClient: "npm",
+  appName: "proyecto9b",
   webDir: "www",
+
+  server: {
+    androidScheme: "http",
+    hostname: "localhost",
+    cleartext: true,
+  },
 };
 
 export default config;

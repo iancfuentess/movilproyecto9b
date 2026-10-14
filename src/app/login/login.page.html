@@ -1,80 +1,139 @@
 <ion-content [fullscreen]="true" class="login-content">
 
-  <div class="brand">
-    <a href="https://www.jamiecoulter.co.uk" target="_blank">
-      <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/logo.png" alt="Logo" />
-    </a>
-  </div>
+  <main class="login-page">
 
-  <div class="login" [ngClass]="{'test': isTest, 'testtwo': isTestTwo}">
-    <div class="login_title">
-      <span>Login to your account</span>
-    </div>
-
-    @if (showFields) {
-    <div class="login_fields">
-      <div class="login_fields__user">
-        <div class="icon" [style.opacity]="userFocus ? 1 : 0.5">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/user_icon_copy.png" alt="User Icon" />
-        </div>
-        <input type="text" placeholder="Username" [(ngModel)]="username" (focus)="userFocus = true"
-          (blur)="userFocus = false" [disabled]="loading" (keyup.enter)="login()" />
-        <div class="validation" [style.opacity]="username.length > 0 ? 1 : 0"
-          [style.right.px]="username.length > 0 ? 30 : 20">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png" alt="Tick" />
-        </div>
+    <!-- IDENTIDAD -->
+    <section class="brand-section">
+      <div class="book-logo">
+        <span>BT</span>
       </div>
 
-      <div class="login_fields__password">
-        <div class="icon" [style.opacity]="passFocus ? 1 : 0.5">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/lock_icon_copy.png" alt="Lock Icon" />
-        </div>
-        <input type="password" placeholder="Password" [(ngModel)]="password" (focus)="passFocus = true"
-          (blur)="passFocus = false" [disabled]="loading" (keyup.enter)="login()" />
-        <div class="validation" [style.opacity]="password.length > 0 ? 1 : 0"
-          [style.right.px]="password.length > 0 ? 30 : 20">
-          <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/tick.png" alt="Tick" />
-        </div>
+      <h1>BookTrack</h1>
+      <p>Tu biblioteca, tus lecturas, tu progreso.</p>
+    </section>
+
+    <!-- TARJETA LOGIN -->
+    <section class="login-card" [ngClass]="{
+        'test': isTest,
+        'testtwo': isTestTwo
+      }">
+
+      @if (showFields) {
+
+      <div class="login-header">
+        <span class="eyebrow">BIENVENIDO</span>
+        <h2>Inicia sesión</h2>
+        <p>Accede a tu biblioteca personal.</p>
       </div>
 
-      <div class="login_fields__submit">
-        <input type="submit" [value]="loading ? 'Loading...' : 'Log In'" (click)="login()" [disabled]="loading" />
-        <div class="forgot">
-          <a href="#" (click)="$event.preventDefault()">Forgotten password?</a>
+      <div class="login-fields">
+
+        <!-- SERVIDOR -->
+        <div class="field-group">
+          <label for="servidor">Servidor</label>
+
+          <div class="input-container">
+            <span class="input-icon">⌁</span>
+
+            <input id="servidor" type="text" placeholder="192.168.1.120:80" [(ngModel)]="servidor" [disabled]="loading"
+              autocomplete="off" />
+          </div>
+
+          <span class="field-help">
+            Dirección del equipo donde se ejecuta XAMPP
+          </span>
         </div>
+
+        <!-- USUARIO -->
+        <div class="field-group">
+          <label for="username">Usuario</label>
+
+          <div class="input-container" [class.input-active]="userFocus">
+            <span class="input-icon">○</span>
+
+            <input id="username" type="text" placeholder="Ingresa tu usuario" [(ngModel)]="username"
+              (focus)="userFocus = true" (blur)="userFocus = false" [disabled]="loading" (keyup.enter)="login()"
+              autocomplete="username" />
+
+            @if (username.length > 0) {
+            <span class="input-check">✓</span>
+            }
+          </div>
+        </div>
+
+        <!-- CONTRASEÑA -->
+        <div class="field-group">
+          <label for="password">Contraseña</label>
+
+          <div class="input-container" [class.input-active]="passFocus">
+            <span class="input-icon">◇</span>
+
+            <input id="password" type="password" placeholder="Ingresa tu contraseña" [(ngModel)]="password"
+              (focus)="passFocus = true" (blur)="passFocus = false" [disabled]="loading" (keyup.enter)="login()"
+              autocomplete="current-password" />
+
+            @if (password.length > 0) {
+            <span class="input-check">✓</span>
+            }
+          </div>
+        </div>
+
+        @if (errorMessage) {
+        <div class="login-error">
+          {{ errorMessage }}
+        </div>
+        }
+
+        <!-- BOTÓN -->
+        <button type="button" class="login-button" (click)="login()" [disabled]="loading">
+          @if (loading) {
+          <span class="button-loader"></span>
+          Iniciando sesión...
+          } @else {
+          Iniciar sesión
+          <span class="button-arrow">→</span>
+          }
+        </button>
+
       </div>
-      @if (errorMessage) {
-      <p class="login-error">{{ errorMessage }}</p>
+
       }
-    </div>
-    }
 
-    @if (showSuccess) {
-    <div class="success">
-      <h2>Authentication Success</h2>
-      <p>Welcome back</p>
-    </div>
-    }
+      @if (showSuccess) {
 
-    @if (showFields) {
-    <div class="disclaimer">
-      <p>Ian Castro Fuentes</p>
-    </div>
-    }
+      <div class="success">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <h2>¡Bienvenido!</h2>
+
+        <p>
+          Inicio de sesión correcto.
+        </p>
+
+      </div>
+
+      }
+
+    </section>
+
+    <!-- PIE -->
+    <footer class="login-footer">
+      <p>BookTrack</p>
+      <span>Ian Castro Fuentes</span>
+    </footer>
+
+  </main>
+
+  <!-- AUTENTICANDO -->
+  <div class="authent" [ngClass]="{
+      'visible': isAuthentVisible
+    }" [style.display]="authentDisplay" [style.right.px]="authentRight" [style.opacity]="authentOpacity">
+    <div class="authent-spinner"></div>
+
+    <p>Autenticando...</p>
   </div>
-
-  <div class="authent" [ngClass]="{'visible': isAuthentVisible}" [style.display]="authentDisplay"
-    [style.right.px]="authentRight" [style.opacity]="authentOpacity">
-    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/puff.svg" alt="Loading" />
-    <p>Authenticating...</p>
-  </div>
-
-
-  <!--  <div class="love">
-    <p>Made with <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/217233/love_copy.png" alt="Love" /> by <a
-        href="https://www.jamiecoulter.co.uk" target="_blank">Jcoulterdesign</a></p>
-  </div> -->
 
 </ion-content>
-
-<!-- al inicio y -->
